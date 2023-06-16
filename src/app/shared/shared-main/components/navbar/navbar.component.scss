@@ -1,0 +1,36 @@
+.toolbar {
+  display: block;
+  // Making sure the toolbar is on top of the sidenav
+  z-index: 2;
+}
+
+.main-nav {
+  justify-content: space-between;
+}
+
+.side-nav {
+  width: min(85%, 250px);
+}
+
+.secondary-nav {
+  position: relative;
+  justify-content: center;
+  height: 65px;
+  padding: 8px 16px !important;
+
+  .menu-btn {
+    position: absolute;
+    left: 16px;
+  }
+
+  .search-input {
+    // Remove the wrapper of the error/hint messages
+    .mat-mdc-form-field-subscript-wrapper {
+      display: none;
+    }
+  }
+}
+
+.sidenav-container {
+  height: 100%;
+}

@@ -26,6 +26,7 @@ $angular-store-theme: mat.define-light-theme(
       accent: $angular-store-accent,
       warn: $angular-store-warn,
     ),
+    density: -2,
   )
 );
 

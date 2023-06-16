@@ -1,0 +1,39 @@
+<mat-toolbar class="toolbar" color="primary">
+  <mat-toolbar-row class="main-nav mat-elevation-z4">
+    <span>Angular Store</span>
+
+    <div>
+      <button mat-icon-button aria-label="Boton de usuario">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <button mat-icon-button aria-label="Boton de carrito de compras">
+        <mat-icon>shopping_cart</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row class="secondary-nav">
+    <mat-form-field class="search-input">
+      <input matInput type="text" placeholder="Busca un producto">
+      <button matSuffix mat-icon-button aria-label="Search">
+        <mat-icon color="primary">search</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button *ngIf="(bpService.isXsmall$ | async)?.matches" class="menu-btn" mat-icon-button
+      aria-label="Boton de abrir menu lateral" (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav class="side-nav" [opened]="!(bpService.isXsmall$ | async)?.matches"
+    [mode]="(bpService.isXsmall$ | async)?.matches ? 'over' : 'side'" #sidenav [fixedInViewport]="false">
+    <app-sidenav-content></app-sidenav-content>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
