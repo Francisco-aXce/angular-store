@@ -7,6 +7,7 @@
 }
 
 .main-nav {
+  height: 56px;
   justify-content: space-between;
 }
 
@@ -30,7 +31,9 @@
 }
 
 .sidenav-container {
-  height: 100%;
+  // Makes height of the sidenav container to be 100% of the viewport excluding the toolbar and the secondary nav
+  // To make sure the backdrop covers the whole screen
+  min-height: calc(100% - 56px - 65px);
 }
 
 .side-nav {
@@ -40,6 +43,11 @@
 @include min-width(sm) {
   .main-nav {
     height: 70px;
+  }
+
+  .sidenav-container {
+    // Here the secondary nav is not present
+    min-height: calc(100% - 70px);
   }
 
   .side-nav {
