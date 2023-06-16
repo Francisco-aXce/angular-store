@@ -4,6 +4,11 @@
   display: block;
   // Making sure the toolbar is on top of the sidenav
   z-index: 2;
+
+  .brand-name {
+    color: #fff;
+    text-decoration: none;
+  }
 }
 
 .main-nav {
