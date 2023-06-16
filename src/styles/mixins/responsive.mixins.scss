@@ -1,0 +1,26 @@
+// Using predefined https://material.angular.io/ layout breakpoints
+
+/*
+  IMPORTANT: I decided to make use of the breakpoint by min-width, because it is more convenient to use in the futures.
+*/
+
+// Defining breakpoints map
+$breakpoints: (
+  xs: 0,
+  sm: 600px,
+  md: 960px,
+  lg: 1280px,
+  xl: 1920px,
+);
+
+// Defining mixin
+@mixin min-width($breakpoint) {
+  // In case of invalid breakpoint
+  @if not map-has-key($breakpoints, $breakpoint) {
+    @error "Invalid breakpoint: #{$breakpoint}.";
+  }
+
+  @media (min-width: map-get($breakpoints, $breakpoint)) {
+    @content;
+  }
+}
