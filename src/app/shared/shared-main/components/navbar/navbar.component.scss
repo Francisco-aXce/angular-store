@@ -1,3 +1,5 @@
+@import "src/styles/mixins/responsive.mixins.scss";
+
 .toolbar {
   display: block;
   // Making sure the toolbar is on top of the sidenav
@@ -6,10 +8,6 @@
 
 .main-nav {
   justify-content: space-between;
-}
-
-.side-nav {
-  width: min(85%, 250px);
 }
 
 .secondary-nav {
@@ -22,15 +20,33 @@
     position: absolute;
     left: 16px;
   }
+}
 
-  .search-input {
-    // Remove the wrapper of the error/hint messages
-    .mat-mdc-form-field-subscript-wrapper {
-      display: none;
-    }
+.search-input {
+  // Remove the wrapper of the error/hint messages
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
   }
 }
 
 .sidenav-container {
   height: 100%;
+}
+
+.side-nav {
+  width: min(85%, 250px);
+}
+
+@include min-width(sm) {
+  .main-nav {
+    height: 70px;
+  }
+
+  .side-nav {
+    width: min(85%, 300px);
+  }
+
+  .search-input {
+    width: 40%;
+  }
 }
