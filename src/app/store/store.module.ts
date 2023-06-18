@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { StoreRoutingModule } from './store-routing.module';
 import { HomeComponent } from './pages/home/home.component';
+import { ProductsService } from '../services/products.service';
 
 
 @NgModule({
@@ -12,6 +13,9 @@ import { HomeComponent } from './pages/home/home.component';
   imports: [
     CommonModule,
     StoreRoutingModule
-  ]
+  ],
+  providers: [
+    ProductsService,
+  ],
 })
 export class StoreModule { }
