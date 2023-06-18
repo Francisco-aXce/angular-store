@@ -1,0 +1,23 @@
+@import "src/styles/mixins/responsive.mixins.scss";
+
+.home {
+  margin: 34px auto;
+}
+
+@include min-width(md) {
+  .home {
+    max-width: 823px;
+  }
+}
+
+@include min-width(lg) {
+  .home {
+    max-width: 953px;
+  }
+}
+
+@include min-width(xl) {
+  .home {
+    max-width: 1300px;
+  }
+}

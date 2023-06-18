@@ -1,1 +1,5 @@
-<p>home works!</p>
+<main class="home container">
+  <article>
+    <app-products-list [products]="products" [vertical]="!(bpService.isXsmall$ | async)?.matches"></app-products-list>
+  </article>
+</main>

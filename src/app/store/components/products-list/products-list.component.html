@@ -1,0 +1,5 @@
+<div class="product-list" [ngClass]="{'product-list--vertical': vertical}">
+  <app-product-card class="product" [ngClass]="{'product--vertical': vertical}" *ngFor="let product of products"
+    [product]="product" [vertical]="vertical">
+  </app-product-card>
+</div>

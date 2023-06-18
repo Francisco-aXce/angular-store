@@ -5,7 +5,9 @@ export interface Product {
   nombre: string;
   id_producto: number;
   id_subcategoria: number;
+  subcategoria?: SubCategory;
   precio: number;
+  precio_final?: number;
   imagenes: ProductImage[];
   vendible: number;
   stock: number;
@@ -21,6 +23,8 @@ interface ProductImage {
 
 // #endregion
 
+// #region Category
+
 interface Group {
   nombre: string;
 }
@@ -28,3 +32,12 @@ interface Group {
 export interface Category extends Group {
   subCategories?: Category[];
 }
+
+export interface SubCategory extends Group {
+  id: number;
+  id_agrupador: number;
+  imagen: string;
+  orden: number;
+}
+
+// #endregion

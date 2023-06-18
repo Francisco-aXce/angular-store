@@ -1,0 +1,16 @@
+.product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+
+  &.product-list--vertical {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+.product {
+  &.product--vertical {
+    display: contents;
+  }
+}
