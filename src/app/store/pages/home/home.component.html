@@ -1,5 +1,10 @@
 <main class="home container">
+  <section>
+    <app-subcategory-presentation></app-subcategory-presentation>
+  </section>
+
   <article>
-    <app-products-list [products]="products" [vertical]="!(bpService.isXsmall$ | async)?.matches"></app-products-list>
+    <app-products-list [products]="(products$ | async) ?? []" [vertical]="!(bpService.isXsmall$ | async)?.matches">
+    </app-products-list>
   </article>
 </main>

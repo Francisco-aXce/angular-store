@@ -25,15 +25,14 @@ interface ProductImage {
 
 // #region Category
 
-interface Group {
+export interface Category {
   nombre: string;
+  id: number;
+  subCategories?: SubCategory[];
 }
 
-export interface Category extends Group {
-  subCategories?: Category[];
-}
-
-export interface SubCategory extends Group {
+export interface SubCategory {
+  nombre: string;
   id: number;
   id_agrupador: number;
   imagen: string;

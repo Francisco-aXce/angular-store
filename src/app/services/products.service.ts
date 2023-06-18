@@ -3,9 +3,15 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Product, SubCategory } from '../store/models/product.model';
+import { Category, Product, SubCategory } from '../store/models/product.model';
 
-@Injectable()
+/*
+  According to the requirements, the user should be able to see the products without being logged in.
+  So in that case, there is no need to limit the service to a module.
+*/
+@Injectable({
+  providedIn: 'root',
+})
 export class ProductsService {
 
   private readonly apiTestUrl = environment.apiTestUrl;
@@ -13,12 +19,34 @@ export class ProductsService {
   // Save private observable to avoid multiple requests
   private products$?: Observable<Product[]>;
   private subCategories$?: Observable<SubCategory[]>;
+  readonly categories$: Observable<Category[]>;
+
+  // Since "Categories" names was not provided, I define them here based on the subcategories.
+  // These are used to display the categories in the sidenav
+  private readonly categoriesNames: { [key: number]: string } = {
+    1: 'Mothers',
+    2: 'Placas de video',
+    5: 'Notebooks',
+    6: 'Monitores',
+    7: 'Procesadores',
+    8: 'Gabinetes',
+    9: 'Almacenamiento',
+    10: 'Memorias',
+    24: 'Periféricos',
+    25: 'Refrigeración',
+    26: 'Fuentes',
+  };
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    // As the categories come from the subcategories, we need to request them first
+    this.categories$ = this.getSubCategories().pipe(
+      map(subCategories => this.processCategories(subCategories)),
+    );
+  }
 
-  processProducts(products: Product[], subCategories: SubCategory[]): Product[] {
+  private processProducts(products: Product[], subCategories: SubCategory[]): Product[] {
     const processedProducts: Product[] = [...products];
 
     return processedProducts.map(product => {
@@ -35,6 +63,33 @@ export class ProductsService {
     });
   }
 
+  private processSubCategories(subCategories: SubCategory[]): SubCategory[] {
+    const processedSubCategories: SubCategory[] = [...subCategories];
+
+    // sorted by order
+    processedSubCategories.sort((a, b) => a.orden - b.orden);
+
+    return processedSubCategories;
+  }
+
+  private processCategories(subCategories: SubCategory[]): Category[] {
+    // Get categories
+    const categoriesObj: { [key: number]: Category } = {};
+    subCategories.forEach(subCategory => {
+      categoriesObj[subCategory.id_agrupador] = {
+        id: subCategory.id_agrupador,
+        nombre: this.categoriesNames[subCategory.id_agrupador] ?? 'Categoria desconocida',
+        subCategories: [
+          ...(categoriesObj[subCategory.id_agrupador]?.subCategories || []),
+          subCategory,
+        ],
+      };
+    });
+
+    // Emit categories
+    return Object.values(categoriesObj);
+  }
+
   // #region Requests
 
   getSubCategories(): Observable<SubCategory[]> {
@@ -47,7 +102,11 @@ export class ProductsService {
     const url = `${this.apiTestUrl}/subcategorias.json`;
 
     // Use shareReplay(1) to avoid multiple requests
-    this.subCategories$ = this.http.get<SubCategory[]>(url).pipe(shareReplay(1));
+    this.subCategories$ = this.http.get<SubCategory[]>(url).pipe(
+      map(subcategories => this.processSubCategories(subcategories)),
+      tap(console.log),
+      shareReplay(1),
+    );
     return this.subCategories$;
   }
 

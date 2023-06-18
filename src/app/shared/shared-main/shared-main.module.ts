@@ -10,6 +10,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { SidenavContentComponent } from './components/sidenav-content/sidenav-content.component';
 import { NestedTreeComponent } from './components/nested-tree/nested-tree.component';
 import { RouterModule } from '@angular/router';
+import { ProductsService } from 'src/app/services/products.service';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,9 @@ import { RouterModule } from '@angular/router';
     MatInputModule,
     MatSidenavModule,
     MatTreeModule,
+  ],
+  providers: [
+    ProductsService,
   ],
   exports: [
     NavbarComponent,
