@@ -39,6 +39,8 @@ export class HomeComponent {
             },
             queryParamsHandling: 'merge',
           });
+
+          this.selectedSubcategoryId$.next(undefined);
           return products;
         }
 
