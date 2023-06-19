@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import { map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Category, Product, SortOptions, SubCategory } from '../store/models/product.model';
+import { LoggerService } from './logger.service';
 
 /*
   According to the requirements, the user should be able to see the products without being logged in.
@@ -44,7 +45,8 @@ export class ProductsService {
   };
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private logger: LoggerService,
   ) {
     // As the categories come from the subcategories, we need to request them first
     this.categories$ = this.getSubCategories().pipe(
@@ -135,7 +137,7 @@ export class ProductsService {
     // Use shareReplay(1) to avoid multiple requests
     this.subCategories$ = this.http.get<SubCategory[]>(url).pipe(
       map(subcategories => this.processSubCategories(subcategories)),
-      tap(console.log),
+      tap(subCategories => this.logger.log('**Subcategories**', subCategories)),
       shareReplay(1),
     );
     return this.subCategories$;
@@ -161,7 +163,7 @@ export class ProductsService {
           })
         );
       }),
-      tap(console.log),
+      tap(products => this.logger.log('**Products**', products)),
       shareReplay(1),
     );
     return this.products$;

@@ -4,6 +4,7 @@ import { map, tap } from 'rxjs/operators';
 import { Filters } from '../../models/product.model';
 import { Observable, combineLatest } from 'rxjs';
 import { ProductsService } from 'src/app/services/products.service';
+import { LoggerService } from 'src/app/services/logger.service';
 
 @Component({
   selector: 'app-product-filters',
@@ -25,13 +26,14 @@ export class ProductFiltersComponent {
 
       return filters;
     }),
-    tap(console.log),
+    tap(filters => this.logger.log('**Filters**', filters)),
   );
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private productsService: ProductsService,
+    private logger: LoggerService,
   ) { }
 
   onRemoveFilter(key: string) {
