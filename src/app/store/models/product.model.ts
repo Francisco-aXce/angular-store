@@ -4,6 +4,13 @@ export enum Filters {
   SUBCATEGORY = 'subCate',
 }
 
+export enum SortOptions {
+  NONE = 'Sin orden',
+  FEATURED = 'Destacado',
+  PRICE_ASC = 'Menor precio',
+  PRICE_DESC = 'Mayor precio',
+}
+
 export interface Product {
   destacado: number;
   nombre: string;

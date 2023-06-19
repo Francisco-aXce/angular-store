@@ -14,10 +14,15 @@
 .products-description__options {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 
-@include min-width(md) {
+.products-description__filters {
+  display: contents;
+}
+
+@include min-width(sm) {
   .products-description {
     gap: 15px;
   }
@@ -26,6 +31,14 @@
 @include min-width(md) {
   .home {
     max-width: 823px;
+  }
+
+  .products-description__options {
+    justify-content: space-between;
+  }
+
+  .products-description__filters {
+    display: block;
   }
 }
 

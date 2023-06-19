@@ -10,6 +10,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { SubcategoryPresentationComponent } from './components/subcategory-presentation/subcategory-presentation.component';
 import { ProductFiltersComponent } from './components/product-filters/product-filters.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { ProductsSortComponent } from './components/products-sort/products-sort.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -18,6 +22,7 @@ import { MatChipsModule } from '@angular/material/chips';
     ProductsListComponent,
     SubcategoryPresentationComponent,
     ProductFiltersComponent,
+    ProductsSortComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +32,9 @@ import { MatChipsModule } from '@angular/material/chips';
     MatButtonModule,
     MatIconModule,
     MatChipsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
   ],
 })
 export class StoreModule { }

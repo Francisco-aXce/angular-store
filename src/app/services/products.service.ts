@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import { map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Category, Product, SubCategory } from '../store/models/product.model';
+import { Category, Product, SortOptions, SubCategory } from '../store/models/product.model';
 
 /*
   According to the requirements, the user should be able to see the products without being logged in.
@@ -23,6 +23,9 @@ export class ProductsService {
 
   // Loading states
   readonly loadingProducts$ = new BehaviorSubject<boolean>(true);
+
+  // Sort options
+  readonly sortBy$ = new BehaviorSubject<SortOptions>(SortOptions.NONE);
 
   // Since "Categories" names was not provided, I define them here based on the subcategories.
   // These are used to display the categories in the sidenav
@@ -56,8 +59,21 @@ export class ProductsService {
 
   // #region Data processing for requests
 
-  private processProducts(products: Product[], subCategories: SubCategory[]): Product[] {
+  private processProducts(products: Product[], subCategories: SubCategory[], sortOption: SortOptions): Product[] {
     const processedProducts: Product[] = [...products];
+
+    // Sort products
+    switch (sortOption) {
+      case SortOptions.FEATURED:
+        processedProducts.sort((a, b) => b.destacado - a.destacado);
+        break;
+      case SortOptions.PRICE_ASC:
+        processedProducts.sort((a, b) => a.precio - b.precio);
+        break;
+      case SortOptions.PRICE_DESC:
+        processedProducts.sort((a, b) => b.precio - a.precio);
+        break;
+    }
 
     return processedProducts.map(product => {
       const subCategory = subCategories.find(subCategory => subCategory.id === product.id_subcategoria);
@@ -135,13 +151,13 @@ export class ProductsService {
     const url = `${this.apiTestUrl}/productos.json`;
 
     // Use shareReplay(1) to avoid multiple requests
-    this.products$ = this.http.get<Product[]>(url).pipe(
-      switchMap(products => {
+    this.products$ = combineLatest([this.http.get<Product[]>(url), this.sortBy$]).pipe(
+      switchMap(([products, sortOption]) => {
         // Get subcategories
         return this.getSubCategories().pipe(
           map(subCategories => {
             // Process products
-            return this.processProducts(products, subCategories);
+            return this.processProducts(products, subCategories, sortOption);
           })
         );
       }),
