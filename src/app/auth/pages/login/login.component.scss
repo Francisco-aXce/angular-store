@@ -13,6 +13,11 @@
   margin-bottom: 15px;
 }
 
+.mat-mdc-card-actions {
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
 .input-container {
   display: flex;
   flex-direction: column;
