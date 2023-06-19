@@ -1,0 +1,10 @@
+<ng-container *ngIf="(filters$ | async | keyvalue) as filters">
+  <mat-chip-listbox *ngIf="filters?.length" [selectable]="false" aria-label="Filtros de producto">
+    <mat-chip-option (removed)="onRemoveFilter(filter.key)" *ngFor="let filter of filters">
+      {{filter.value}}
+      <button matChipRemove [ariaLabel]="'eliminar filtro ' + filter.value">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip-option>
+  </mat-chip-listbox>
+</ng-container>

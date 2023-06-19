@@ -28,7 +28,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav class="side-nav" [opened]="!(bpService.isXsmall$ | async)?.matches"
     [mode]="(bpService.isXsmall$ | async)?.matches ? 'over' : 'side'" #sidenav [fixedInViewport]="false">
-    <app-sidenav-content></app-sidenav-content>
+    <app-sidenav-content [categories]="(productsService.categories$ | async)"></app-sidenav-content>
   </mat-sidenav>
 
   <mat-sidenav-content>

@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { BreakpointsService } from 'src/app/services/breakpoints.service';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +12,7 @@ export class NavbarComponent {
 
   constructor(
     public bpService: BreakpointsService,
+    public productsService: ProductsService,
   ) { }
 
 }

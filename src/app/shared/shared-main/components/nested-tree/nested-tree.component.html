@@ -3,8 +3,8 @@
   <!-- There is inline padding applied to this node using styles.
     This padding value depends on the mat-icon-button width. -->
   <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
-    <a mat-button [routerLink]="['/', node.redirect]">
-      {{node.name}}
+    <a class="node__button" mat-button color="primary" [routerLink]="['/']" [queryParams]="{subCate: node.id}">
+      - {{node.name}}
     </a>
   </mat-tree-node>
   <!-- This is the tree node template for expandable nodes -->

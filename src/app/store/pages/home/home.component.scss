@@ -1,0 +1,55 @@
+@import "src/styles/mixins/responsive.mixins.scss";
+
+.home {
+  margin: 34px auto;
+}
+
+.products-description {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 15px;
+}
+
+.products-description__options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.products-description__filters {
+  display: contents;
+}
+
+@include min-width(sm) {
+  .products-description {
+    gap: 15px;
+  }
+}
+
+@include min-width(md) {
+  .home {
+    max-width: 823px;
+  }
+
+  .products-description__options {
+    justify-content: space-between;
+  }
+
+  .products-description__filters {
+    display: block;
+  }
+}
+
+@include min-width(lg) {
+  .home {
+    max-width: 953px;
+  }
+}
+
+@include min-width(xl) {
+  .home {
+    max-width: 1300px;
+  }
+}

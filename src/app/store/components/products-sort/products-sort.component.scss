@@ -1,0 +1,6 @@
+.sort-input {
+  // Remove the wrapper of the error/hint messages
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+}

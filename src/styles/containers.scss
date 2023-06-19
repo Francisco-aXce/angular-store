@@ -1,0 +1,11 @@
+@import "src/styles/mixins/responsive.mixins.scss";
+
+.container {
+  padding: 0 10px;
+}
+
+@include min-width(md) {
+  .container {
+    padding: 0 17px;
+  }
+}

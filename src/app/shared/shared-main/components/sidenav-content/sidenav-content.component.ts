@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Category } from 'src/app/store/models/product.model';
 import { TreeNode } from 'src/app/store/models/tree.model';
 
 @Component({
@@ -8,29 +9,22 @@ import { TreeNode } from 'src/app/store/models/tree.model';
 })
 export class SidenavContentComponent {
 
-  // FIXME: THIS IS TEMP DATA
+  @Input() set categories(value: Category[] | null) {
+    if (value === null) return;
+    this.onCategoriesChange(value);
+  }
 
-  readonly categories: TreeNode[] = [
-    {
-      name: 'Categoría 1',
-      children: [
-        {
-          name: 'Subcategoría 1',
-          redirect: 'auth',
-        },
-      ],
-    },
-    {
-      name: 'Categoría 2',
-      children: [
-        {
-          name: 'Subcategoría 1',
-          redirect: 'auth',
-        },
-      ],
-    },
-  ];
+  treeData: TreeNode[] = [];
 
-  // ---
+  private onCategoriesChange(categories: Category[]): void {
+    this.treeData = categories.map(category => ({
+      name: category.nombre,
+      id: category.id,
+      children: category.subCategories?.map(subcategory => ({
+        name: subcategory.nombre,
+        id: subcategory.id,
+      })),
+    }));
+  }
 
 }
