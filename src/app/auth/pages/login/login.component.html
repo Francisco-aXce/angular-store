@@ -6,7 +6,7 @@
       </mat-card-header>
 
       <mat-card-content>
-        <form class="input-container" [formGroup]="loginFormGroup">
+        <form class="input-container" [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
           <mat-form-field appearance="outline">
             <mat-label>Ingresa tu email</mat-label>
             <input type="email" matInput placeholder="francisco@ejemplo.com" formControlName="email" required>
@@ -21,8 +21,8 @@
           <mat-form-field appearance="outline">
             <mat-label>Ingresa tu contraseña</mat-label>
             <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
-            <button mat-icon-button matSuffix (click)="onTogglePassword()"
-              [attr.aria-label]="'Ocultar o mostrar contraseña'" [attr.aria-pressed]="hidePassword">
+            <button type="button" mat-icon-button matSuffix (click)="onTogglePassword()"
+              [attr.aria-pressed]="hidePassword">
               <mat-icon>
                 {{hidePassword ? 'visibility_off' : 'visibility'}}
               </mat-icon>
@@ -38,8 +38,13 @@
       </mat-card-content>
 
       <mat-card-actions>
-        <button mat-button (click)="onCancel()">Cancelar</button>
-        <button mat-raised-button color="primary">Iniciar sesión</button>
+        <button mat-button type="button" (click)="onCancel()">Cancelar</button>
+        <button mat-raised-button [disabled]="loading" color="primary">
+          <mat-icon *ngIf="loading">
+            <mat-progress-spinner mode="indeterminate" [diameter]="17" color="accent"></mat-progress-spinner>
+          </mat-icon>
+          Iniciar sesión
+        </button>
       </mat-card-actions>
     </mat-card>
   </section>

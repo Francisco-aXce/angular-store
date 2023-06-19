@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { LoginUser } from '../../models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -19,9 +21,11 @@ export class LoginComponent {
   get password() { return this.loginFormGroup.controls.password; }
 
   hidePassword = true;
+  loading = false;
 
   constructor(
     private router: Router,
+    private authService: AuthService,
   ) { }
 
   onTogglePassword() {
@@ -30,6 +34,19 @@ export class LoginComponent {
 
   onCancel() {
     this.router.navigate(['/']);
+  }
+
+  async onSubmit() {
+    this.loginFormGroup.markAllAsTouched();
+    if (this.loginFormGroup.invalid || this.loading) return;
+    this.loading = true;
+
+    const email = this.email.value ?? '';
+    const password = this.password.value ?? '';
+    const credentials: LoginUser = { email, password };
+
+    await this.authService.login(credentials);
+    this.loading = false;
   }
 
 }
