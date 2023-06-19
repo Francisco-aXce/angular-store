@@ -8,7 +8,8 @@ import { ProductsListComponent } from './components/products-list/products-list.
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { SubcategoryPresentationComponent } from './components/subcategory-presentation/subcategory-presentation.component';
-
+import { ProductFiltersComponent } from './components/product-filters/product-filters.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { SubcategoryPresentationComponent } from './components/subcategory-prese
     ProductCardComponent,
     ProductsListComponent,
     SubcategoryPresentationComponent,
+    ProductFiltersComponent,
   ],
   imports: [
     CommonModule,
@@ -24,6 +26,7 @@ import { SubcategoryPresentationComponent } from './components/subcategory-prese
     // Angular Material
     MatButtonModule,
     MatIconModule,
+    MatChipsModule,
   ],
 })
 export class StoreModule { }

@@ -24,7 +24,7 @@ export class SidenavContentComponent {
         name: subcategory.nombre,
         id: subcategory.id,
       })),
-    }))
+    }));
   }
 
 }

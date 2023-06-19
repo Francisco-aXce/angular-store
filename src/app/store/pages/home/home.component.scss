@@ -4,6 +4,19 @@
   margin: 34px auto;
 }
 
+.products-description {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.products-description__options {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 @include min-width(md) {
   .home {
     max-width: 823px;

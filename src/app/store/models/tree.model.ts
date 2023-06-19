@@ -3,6 +3,6 @@
  */
 export interface TreeNode {
   name: string;
-  id: number;
+  id?: number;
   children?: TreeNode[];
 }

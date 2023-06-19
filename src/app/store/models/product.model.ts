@@ -1,5 +1,9 @@
 // #region Product
 
+export enum Filters {
+  SUBCATEGORY = 'subCate',
+}
+
 export interface Product {
   destacado: number;
   nombre: string;

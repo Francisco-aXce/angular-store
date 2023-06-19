@@ -23,18 +23,18 @@ export class ProductsService {
 
   // Since "Categories" names was not provided, I define them here based on the subcategories.
   // These are used to display the categories in the sidenav
-  private readonly categoriesNames: { [key: number]: string } = {
-    1: 'Mothers',
-    2: 'Placas de video',
-    5: 'Notebooks',
-    6: 'Monitores',
-    7: 'Procesadores',
-    8: 'Gabinetes',
-    9: 'Almacenamiento',
-    10: 'Memorias',
-    24: 'Periféricos',
-    25: 'Refrigeración',
-    26: 'Fuentes',
+  private readonly categoriesNames: { [key: string]: string } = {
+    "1": 'Mothers',
+    "2": 'Placas de video',
+    "5": 'Notebooks',
+    "6": 'Monitores',
+    "7": 'Procesadores',
+    "8": 'Gabinetes',
+    "9": 'Almacenamiento',
+    "10": 'Memorias',
+    "24": 'Periféricos',
+    "25": 'Refrigeración',
+    "26": 'Fuentes',
   };
 
   constructor(
@@ -45,6 +45,13 @@ export class ProductsService {
       map(subCategories => this.processCategories(subCategories)),
     );
   }
+
+  filterProductsBySubCategory(products: Product[], subCategoryId?: number): Product[] {
+    if (subCategoryId === undefined) return products;
+    return products.filter(product => product.id_subcategoria === subCategoryId);
+  }
+
+  // #region Data processing for requests
 
   private processProducts(products: Product[], subCategories: SubCategory[]): Product[] {
     const processedProducts: Product[] = [...products];
@@ -78,7 +85,7 @@ export class ProductsService {
     subCategories.forEach(subCategory => {
       categoriesObj[subCategory.id_agrupador] = {
         id: subCategory.id_agrupador,
-        nombre: this.categoriesNames[subCategory.id_agrupador] ?? 'Categoria desconocida',
+        nombre: this.categoriesNames[subCategory.id_agrupador.toString()] ?? 'Categoria desconocida',
         subCategories: [
           ...(categoriesObj[subCategory.id_agrupador]?.subCategories || []),
           subCategory,
@@ -89,6 +96,8 @@ export class ProductsService {
     // Emit categories
     return Object.values(categoriesObj);
   }
+
+  // #endregion
 
   // #region Requests
 
