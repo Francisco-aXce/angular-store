@@ -1,11 +1,24 @@
 @import "src/styles/mixins/responsive.mixins.scss";
 
-.container {
+.main-container {
   padding: 0 10px;
 }
 
 @include min-width(md) {
-  .container {
+  .main-container {
+    max-width: 823px;
     padding: 0 17px;
+  }
+}
+
+@include min-width(lg) {
+  .main-container {
+    max-width: 953px;
+  }
+}
+
+@include min-width(xl) {
+  .main-container {
+    max-width: 1300px;
   }
 }

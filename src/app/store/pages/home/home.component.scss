@@ -29,27 +29,11 @@
 }
 
 @include min-width(md) {
-  .home {
-    max-width: 823px;
-  }
-
   .products-description__options {
     justify-content: space-between;
   }
 
   .products-description__filters {
     display: block;
-  }
-}
-
-@include min-width(lg) {
-  .home {
-    max-width: 953px;
-  }
-}
-
-@include min-width(xl) {
-  .home {
-    max-width: 1300px;
   }
 }

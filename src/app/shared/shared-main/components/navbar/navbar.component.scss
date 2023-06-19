@@ -35,6 +35,17 @@
   }
 }
 
+.auth-menu__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 8px;
+}
+
+.auth-menu__button {
+  height: 36px !important;
+}
+
 .sidenav-container {
   // Makes height of the sidenav container to be 100% of the viewport excluding the toolbar and the secondary nav
   // To make sure the backdrop covers the whole screen

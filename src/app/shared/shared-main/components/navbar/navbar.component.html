@@ -7,9 +7,10 @@
     <ng-container *ngTemplateOutlet="!(bpService.isXsmall$ | async)?.matches ? SearchInput : null"></ng-container>
 
     <div>
-      <button mat-icon-button aria-label="Boton de usuario">
+      <button mat-icon-button [mat-menu-trigger-for]="userMenu" aria-label="Boton de usuario">
         <mat-icon>account_circle</mat-icon>
       </button>
+
       <button mat-icon-button aria-label="Boton de carrito de compras">
         <mat-icon>shopping_cart</mat-icon>
       </button>
@@ -44,3 +45,14 @@
     </button>
   </mat-form-field>
 </ng-template>
+
+<mat-menu class="auth-menu" #userMenu="matMenu">
+  <div class="auth-menu__actions">
+    <button class="auth-menu__button" (click)="onLogin()" aria-label="Iniciar sesión" mat-raised-button color="primary">
+      Log In
+    </button>
+    <button class="auth-menu__button" (click)="onSignup()" aria-label="Registrarse" mat-flat-button color="accent">
+      Sign Up
+    </button>
+  </div>
+</mat-menu>
