@@ -8,14 +8,14 @@ import { SubCategory } from '../../models/product.model';
 })
 export class SubcategoryPresentationComponent implements OnChanges {
 
-  @Input() subcategories: SubCategory[] = [];
-  @Input() selectedSubcategoryId: number = 0;
+  @Input() subcategories?: SubCategory[] | null = [];
+  @Input() selectedSubcategoryId?: number = 0;
 
   selectedSubcategory?: SubCategory;
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['selectedSubcategoryId']) {
-      this.selectedSubcategory = this.subcategories.find(subcategory => subcategory.id === this.selectedSubcategoryId);
+    if (changes['selectedSubcategoryId'] || changes['subcategories']) {
+      this.selectedSubcategory = this.subcategories?.find(subcategory => subcategory.id === this.selectedSubcategoryId);
     }
   }
 
