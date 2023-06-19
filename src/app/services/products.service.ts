@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Category, Product, SubCategory } from '../store/models/product.model';
@@ -20,6 +20,9 @@ export class ProductsService {
   private products$?: Observable<Product[]>;
   private subCategories$?: Observable<SubCategory[]>;
   readonly categories$: Observable<Category[]>;
+
+  // Loading states
+  readonly loadingProducts$ = new BehaviorSubject<boolean>(true);
 
   // Since "Categories" names was not provided, I define them here based on the subcategories.
   // These are used to display the categories in the sidenav
@@ -65,6 +68,9 @@ export class ProductsService {
 
       // Calculate final price (with IVA)
       product.precio_final = product.precio * (1 + product.iva / 100);
+
+      // Set loading state to false
+      this.loadingProducts$.next(false);
 
       return product;
     });

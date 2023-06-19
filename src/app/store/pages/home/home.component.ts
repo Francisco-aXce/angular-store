@@ -20,7 +20,7 @@ export class HomeComponent {
 
   constructor(
     public bpService: BreakpointsService,
-    private productsService: ProductsService,
+    public productsService: ProductsService,
     private route: ActivatedRoute,
     private router: Router,
   ) {

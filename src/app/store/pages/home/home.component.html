@@ -10,7 +10,8 @@
   </section>
 
   <article>
-    <app-products-list [products]="(products$ | async) ?? []" [vertical]="!(bpService.isXsmall$ | async)?.matches">
+    <app-products-list [loading]="(productsService.loadingProducts$ | async)??true" [products]="(products$ | async)??[]"
+      [vertical]="!(bpService.isXsmall$ | async)?.matches">
     </app-products-list>
   </article>
 </main>

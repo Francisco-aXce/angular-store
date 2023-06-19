@@ -9,6 +9,7 @@ import { Product } from '../../models/product.model';
 export class ProductsListComponent {
 
   @Input() products: Product[] = [];
+  @Input() loading: boolean = true;
   @Input() vertical: boolean = false;
 
 }
