@@ -45,6 +45,14 @@
   width: min(85%, 250px);
 }
 
+.shopping-cart-btn {
+  .mat-icon .mat-badge-content {
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+  }
+}
+
 @include min-width(sm) {
   .main-nav {
     height: 70px;

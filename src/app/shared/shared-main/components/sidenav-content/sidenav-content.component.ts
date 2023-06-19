@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Category } from 'src/app/store/models/product.model';
-import { TreeNode } from 'src/app/store/models/tree.model';
+import { TreeNode } from 'src/app/shared/shared-main/models/tree.model';
 
 @Component({
   selector: 'app-sidenav-content',

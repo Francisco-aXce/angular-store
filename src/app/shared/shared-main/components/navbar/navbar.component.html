@@ -10,8 +10,11 @@
       <button mat-icon-button aria-label="Boton de usuario">
         <mat-icon>account_circle</mat-icon>
       </button>
-      <button mat-icon-button aria-label="Boton de carrito de compras">
-        <mat-icon>shopping_cart</mat-icon>
+      <button class="shopping-cart-btn" mat-icon-button aria-label="Boton de carrito de compras">
+        <mat-icon [matBadge]="(shoppingService.totalDifferentProducts$ | async)" matBadgeSize="medium"
+          matBadgeColor="accent" [matBadgeHidden]="((shoppingService.totalDifferentProducts$ | async) ?? 0) <= 0">
+          shopping_cart
+        </mat-icon>
       </button>
     </div>
   </mat-toolbar-row>

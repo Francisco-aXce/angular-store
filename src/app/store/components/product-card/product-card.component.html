@@ -8,9 +8,23 @@
     <p class="product__subcategory">{{ product?.subcategoria?.nombre ?? '-' }}</p>
     <div class="product__subsection">
       <h5 class="product__price">{{ product?.precio_final | currency : 'ARS' : 'symbol' }}</h5>
-      <button mat-mini-fab color="accent">
+      <button [disabled]="productsInCart >= (product?.stock ?? 0)" *ngIf="productsInCart <= 0; else CartManagement"
+        mat-mini-fab color="accent" (click)="onAddProductToCart()">
         <mat-icon>add_shopping_cart</mat-icon>
       </button>
     </div>
   </div>
 </section>
+
+<ng-template #CartManagement>
+  <div class="cart-management">
+    <button [disabled]="productsInCart <= 0" (click)="onRemoveProductFromCart()" color="accent" mat-icon-button>
+      <mat-icon>remove</mat-icon>
+    </button>
+    <span>{{productsInCart}}</span>
+    <button [disabled]="productsInCart >= (product?.stock ?? 0)" (click)="onAddProductToCart()" color="accent"
+      mat-icon-button>
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</ng-template>

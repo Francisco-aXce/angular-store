@@ -1,7 +1,7 @@
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { Component, Input } from '@angular/core';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
-import { TreeNode } from 'src/app/store/models/tree.model';
+import { TreeNode } from 'src/app/shared/shared-main/models/tree.model';
 
 @Component({
   selector: 'app-nested-tree',

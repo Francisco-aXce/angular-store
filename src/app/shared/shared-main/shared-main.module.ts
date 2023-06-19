@@ -11,6 +11,7 @@ import { SidenavContentComponent } from './components/sidenav-content/sidenav-co
 import { NestedTreeComponent } from './components/nested-tree/nested-tree.component';
 import { RouterModule } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ProductsService } from 'src/app/services/products.service';
     MatInputModule,
     MatSidenavModule,
     MatTreeModule,
+    MatBadgeModule,
   ],
   providers: [
     ProductsService,
