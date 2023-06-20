@@ -12,6 +12,8 @@ import { NestedTreeComponent } from './components/nested-tree/nested-tree.compon
 import { RouterModule } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatSidenavModule,
     MatTreeModule,
     MatBadgeModule,
+    MatMenuModule,
+    MatDividerModule,
   ],
   providers: [
     ProductsService,

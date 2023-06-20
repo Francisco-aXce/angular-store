@@ -1,0 +1,36 @@
+.login {
+  margin: 34px auto;
+}
+
+.login__card {
+  width: min(100%, 400px);
+}
+
+.mat-mdc-card-header {
+  --mat-card-title-text-size: 24px;
+  --mat-card-title-text-weight: 600;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.mat-mdc-card-actions {
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+form {
+  display: contents;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.centered-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

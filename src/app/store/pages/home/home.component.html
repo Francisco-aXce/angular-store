@@ -1,4 +1,4 @@
-<main class="home container">
+<main class="home main-container">
   <section class="products-description">
     <app-subcategory-presentation *ngIf="(selectedSubcategoryId$ | async) as subCategoryId"
       [selectedSubcategoryId]="subCategoryId" [subcategories]="(subCategories$ | async)">

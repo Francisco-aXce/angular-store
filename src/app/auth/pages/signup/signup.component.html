@@ -1,1 +1,108 @@
-<p>signup works!</p>
+<main class="signup main-container">
+  <section class="centered-section">
+
+    <form [formGroup]="signupFormGroup" (ngSubmit)="onSubmit()">
+      <mat-card class="signup__card">
+        <mat-card-header>
+          <mat-card-title>Registrarse</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+
+          <section class="input-container">
+            <!-- Nombre -->
+            <mat-form-field appearance="outline">
+              <mat-label>Ingresa tu/s nombre/s</mat-label>
+              <input type="text" matInput placeholder="Francisco" formControlName="name" required>
+              <mat-error *ngIf="name.hasError('required')">
+                El nombre es requerido.
+              </mat-error>
+              <mat-error *ngIf="!name.hasError('required') && name.hasError('pattern')">
+                Ingresa un nombre válido.
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Apellido -->
+            <mat-form-field appearance="outline">
+              <mat-label>Ingresa tu/s apellido/s</mat-label>
+              <input type="text" matInput placeholder="Ramos" formControlName="surname" required>
+              <mat-error *ngIf="surname.hasError('required')">
+                El apellido es requerido.
+              </mat-error>
+              <mat-error *ngIf="!surname.hasError('required') && surname.hasError('pattern')">
+                Ingresa un apellido válido.
+              </mat-error>
+            </mat-form-field>
+
+            <!-- DNI -->
+            <mat-form-field appearance="outline">
+              <mat-label>Ingresa tu DNI</mat-label>
+              <input type="number" matInput placeholder="XXXXXXXX" formControlName="dni" required>
+              <mat-error *ngIf="dni.hasError('required')">
+                El DNI es requerido.
+              </mat-error>
+              <mat-error *ngIf="!dni.hasError('required') && dni.hasError('pattern')">
+                Ingresa un DNI válido.
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Email -->
+            <mat-form-field appearance="outline">
+              <mat-label>Ingresa tu email</mat-label>
+              <input type="email" matInput placeholder="francisco@ejemplo.com" formControlName="email" required>
+              <mat-error *ngIf="email.hasError('required')">
+                El email es requerido.
+              </mat-error>
+              <mat-error *ngIf="!email.hasError('required') && email.hasError('email')">
+                Ingresa un email válido.
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Telefono -->
+            <mat-form-field appearance="outline">
+              <mat-label>Ingresa tu número de teléfono</mat-label>
+              <input type="tel" matInput placeholder="54264xxxxxxx" formControlName="cellphone" required>
+              <mat-error *ngIf="cellphone.hasError('required')">
+                El número de teléfono es requerido.
+              </mat-error>
+              <mat-error *ngIf="!cellphone.hasError('required') && cellphone.hasError('pattern')">
+                Ingresa un número de teléfono válido.
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Contraseña -->
+            <mat-form-field appearance="outline">
+              <mat-label>Ingresa tu contraseña</mat-label>
+              <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+              <button type="button" mat-icon-button matSuffix (click)="onTogglePassword()"
+                [attr.aria-pressed]="hidePassword">
+                <mat-icon>
+                  {{hidePassword ? 'visibility_off' : 'visibility'}}
+                </mat-icon>
+              </button>
+              <mat-error *ngIf="password.hasError('required')">
+                Ingresa tu contraseña.
+              </mat-error>
+              <mat-error *ngIf="!password.hasError('required') && password.hasError('pattern')">
+                Ingresa una contraseña válida.
+              </mat-error>
+            </mat-form-field>
+            <a [routerLink]="['/auth', 'login']">¿Ya tienes una cuenta? Inicia sesión</a>
+          </section>
+
+        </mat-card-content>
+
+        <mat-card-actions>
+          <button mat-button type="button" (click)="onCancel()">Cancelar</button>
+          <button mat-raised-button type="submit" [disabled]="loading" color="primary">
+            <mat-icon *ngIf="loading">
+              <mat-progress-spinner mode="indeterminate" [diameter]="17" color="accent"></mat-progress-spinner>
+            </mat-icon>
+            Registrarse
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+
+  </section>
+</main>
