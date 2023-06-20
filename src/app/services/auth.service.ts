@@ -25,6 +25,7 @@ export class AuthService {
   public logout(): void {
     localStorage.removeItem(AuthService.CURRENT_USER_KEY);
     this.currentUser$.next(null);
+    this.toastr.success('Cerraste sesión correctamente', 'Adiós 😢');
   }
 
   /**
@@ -45,14 +46,14 @@ export class AuthService {
         this.currentUser$.next(user);
         // Navigate to the home page
         this.router.navigate(['/']);
-        this.toastr.success('Iniciaste sesión correctamente', 'Bienvenido', { progressBar: true });
+        this.toastr.success('Iniciaste sesión correctamente', 'Bienvenido');
 
         return resolve(true)
       }, 4000));
     } else {
       // To simulate a delay in the response
       return await new Promise(resolve => setTimeout(() => {
-        this.toastr.error('Email o contraseña incorrectos', 'Error', { progressBar: true });
+        this.toastr.error('Email o contraseña incorrectos', 'Error');
 
         return resolve(true)
       }, 4000));
@@ -70,7 +71,7 @@ export class AuthService {
     // Check if the email is already in use, in that case return false
     if (users.find(u => u.email === user.email)) {
       return await new Promise(resolve => setTimeout(() => {
-        this.toastr.error('El email ya está en uso', 'Error', { progressBar: true });
+        this.toastr.error('El email ya está en uso', 'Error');
         return resolve(false);
       }, 4000));
     }
