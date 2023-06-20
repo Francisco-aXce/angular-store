@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LoginUser, User } from '../auth/models/user.model';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class AuthService {
 
   constructor(
     private router: Router,
+    private toastr: ToastrService,
   ) {
     const user = this.getCurrentUser();
     this.currentUser$ = new BehaviorSubject<User | null>(user);
@@ -43,14 +45,14 @@ export class AuthService {
         this.currentUser$.next(user);
         // Navigate to the home page
         this.router.navigate(['/']);
-        console.log('Logged in');
+        this.toastr.success('Iniciaste sesión correctamente', 'Bienvenido', { progressBar: true });
 
         return resolve(true)
       }, 4000));
     } else {
       // To simulate a delay in the response
       return await new Promise(resolve => setTimeout(() => {
-        console.log('Invalid credentials');
+        this.toastr.error('Email o contraseña incorrectos', 'Error', { progressBar: true });
 
         return resolve(true)
       }, 4000));
@@ -68,7 +70,7 @@ export class AuthService {
     // Check if the email is already in use, in that case return false
     if (users.find(u => u.email === user.email)) {
       return await new Promise(resolve => setTimeout(() => {
-        console.log('Email already in use');
+        this.toastr.error('El email ya está en uso', 'Error', { progressBar: true });
         return resolve(false);
       }, 4000));
     }
