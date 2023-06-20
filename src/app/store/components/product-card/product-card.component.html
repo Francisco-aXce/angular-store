@@ -1,9 +1,7 @@
 <section class="product" [ngClass]="{'product--vertical': vertical}">
   <!-- Decidi solo mostrar la primera imagen y no implementar un "swiper" ya que todos los productos tienen solo una imagen -->
   <div class="image-container" [ngClass]="{'image-container--vertical': vertical}">
-    <img class="product__image" [priority]="priority"
-      [ngSrc]="'https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_'+product?.imagenes?.[0]?.nombre+'-med.jpg'"
-      fill [alt]="product?.nombre">
+    <img class="product__image" [src]="image" [srcset]="srcSet" loading="lazy" [alt]="product?.nombre">
   </div>
   <div class="product__info">
     <h4 class="product__name">{{ product?.nombre }}</h4>

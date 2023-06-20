@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 import { StoreRoutingModule } from './store-routing.module';
 import { HomeComponent } from './pages/home/home.component';
@@ -27,7 +27,6 @@ import { MatInputModule } from '@angular/material/input';
   imports: [
     CommonModule,
     StoreRoutingModule,
-    NgOptimizedImage,
 
     // Angular Material
     MatButtonModule,

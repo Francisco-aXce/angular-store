@@ -12,17 +12,9 @@ export class ProductCardComponent implements OnInit {
   @Input() product?: Product;
   @Input() vertical: boolean = false;
 
-  // Note: Im not sure if this is the best way to do this, but with this input,
-  // we can set the priority image to be shown in the product card based on the index of the item to be shown.
-  // I make sure that the priority image is only set once.
-  @Input() set priorityImage(value: boolean) {
-    if (this.priority === undefined) {
-      this.priority = value;
-    }
-  }
-
   productsInCart: number = 0;
-  priority?: boolean;
+  image = '';
+  srcSet = '';
 
   constructor(
     private shoppingService: ShoppingService,
@@ -31,6 +23,13 @@ export class ProductCardComponent implements OnInit {
   ngOnInit(): void {
     if (this.product) {
       this.productsInCart = this.shoppingService.getProductQuantityInCart(this.product);
+
+      // Images
+      const normalImage = 'https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_' + this.product?.imagenes?.[0]?.nombre + '.jpg';
+      const medImage = 'https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_' + this.product?.imagenes?.[0]?.nombre + '-med.jpg';
+      // Passed to te src attribute of the img tag
+      this.image = normalImage;
+      this.srcSet = `${medImage} 600w, ${normalImage} 2000w`;
     }
   }
 
