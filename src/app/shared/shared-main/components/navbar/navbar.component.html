@@ -7,8 +7,9 @@
     <ng-container *ngTemplateOutlet="!(bpService.isXsmall$ | async)?.matches ? SearchInput : null"></ng-container>
 
     <div>
-      <button mat-icon-button [mat-menu-trigger-for]="userMenu" aria-label="Boton de usuario">
-        <mat-icon>account_circle</mat-icon>
+      <button mat-icon-button [mat-menu-trigger-for]="(currentUser$ | async) ? userMenu : authMenu"
+        aria-label="Boton de usuario">
+        <mat-icon>{{(currentUser$ | async) ? 'account_circle' : 'no_accounts'}}</mat-icon>
       </button>
 
       <button mat-icon-button aria-label="Boton de carrito de compras">
@@ -46,13 +47,31 @@
   </mat-form-field>
 </ng-template>
 
-<mat-menu class="auth-menu" #userMenu="matMenu">
+<mat-menu class="auth-menu" #authMenu="matMenu">
   <div class="auth-menu__actions">
     <button class="auth-menu__button" (click)="onLogin()" aria-label="Iniciar sesión" mat-raised-button color="primary">
-      Log In
+      <mat-icon>login</mat-icon>
+      Iniciar sesión
     </button>
     <button class="auth-menu__button" (click)="onSignup()" aria-label="Registrarse" mat-flat-button color="accent">
-      Sign Up
+      <mat-icon>person_add</mat-icon>
+      Registrarse
     </button>
   </div>
+</mat-menu>
+
+<mat-menu class="user-menu" #userMenu="matMenu">
+  <ng-container *ngIf="(currentUser$ | async) as user">
+    <span mat-menu-item><b>{{user.name}} {{user.surname}}</b></span>
+
+    <mat-divider></mat-divider>
+
+    <div class="user-menu__actions">
+      <button mat-raised-button color="warn">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Cerrar sesión</span>
+      </button>
+    </div>
+
+  </ng-container>
 </mat-menu>

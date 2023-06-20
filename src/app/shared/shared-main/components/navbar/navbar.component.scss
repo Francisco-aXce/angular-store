@@ -35,7 +35,8 @@
   }
 }
 
-.auth-menu__actions {
+.auth-menu__actions,
+.user-menu__actions {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -44,6 +45,10 @@
 
 .auth-menu__button {
   height: 36px !important;
+}
+
+.user-menu__actions {
+  padding-top: 8px;
 }
 
 .sidenav-container {

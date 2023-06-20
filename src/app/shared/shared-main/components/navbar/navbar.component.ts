@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { BreakpointsService } from 'src/app/services/breakpoints.service';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -15,7 +16,12 @@ export class NavbarComponent {
     public bpService: BreakpointsService,
     public productsService: ProductsService,
     private router: Router,
+    private authService: AuthService,
   ) { }
+
+  get currentUser$() {
+    return this.authService.currentUser$;
+  }
 
   public onLogin() {
     this.router.navigate(['auth/login']);
@@ -23,6 +29,10 @@ export class NavbarComponent {
 
   public onSignup() {
     this.router.navigate(['auth/signup']);
+  }
+
+  public onLogout() {
+    // this.authService.logout();
   }
 
 }
