@@ -69,6 +69,10 @@
   }
 }
 
+.search-form {
+  display: contents;
+}
+
 @include min-width(sm) {
   .main-nav {
     height: 70px;

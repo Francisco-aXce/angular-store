@@ -54,6 +54,17 @@ export class ProductsService {
     );
   }
 
+  /**
+   * Search products by name. The product should include the search term in his name.
+   * @param {Product[]} products
+   * @param {string} searchTerm
+   * @returns {Product[]} Resulting products.
+   */
+  public searchProducts(products: Product[], searchTerm: string): Product[] {
+    if (!searchTerm) return products;
+    return products.filter(product => product.nombre.toLowerCase().includes(searchTerm.toLowerCase()));
+  }
+
   filterProductsBySubCategory(products: Product[], subCategoryId?: number): Product[] {
     if (subCategoryId === undefined) return products;
     return products.filter(product => product.id_subcategoria === subCategoryId);

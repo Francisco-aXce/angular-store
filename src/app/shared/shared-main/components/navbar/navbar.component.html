@@ -40,12 +40,14 @@
 </mat-sidenav-container>
 
 <ng-template #SearchInput>
-  <mat-form-field class="search-input">
-    <input matInput type="text" placeholder="Busca un producto">
-    <button matSuffix mat-icon-button aria-label="Search">
-      <mat-icon color="primary">search</mat-icon>
-    </button>
-  </mat-form-field>
+  <form class="search-form" [formGroup]="searchForm" (ngSubmit)="onSubmitSeach()">
+    <mat-form-field class="search-input">
+      <input matInput type="text" formControlName="search" placeholder="Busca un producto">
+      <button type="submit" matSuffix mat-icon-button aria-label="Search">
+        <mat-icon color="primary">search</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
 </ng-template>
 
 <mat-menu class="auth-menu" #authMenu="matMenu">

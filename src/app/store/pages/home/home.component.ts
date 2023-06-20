@@ -28,11 +28,12 @@ export class HomeComponent {
 
     this.products$ = combineLatest([this.productsService.getProducts(), this.route.queryParams, this.subCategories$]).pipe(
       map(([products, queryParams, subcategories]) => {
-        const { subCate } = queryParams;
+        let copyProducts = [...products];
+        const { subCate, search } = queryParams;
         const subCategoryId = parseInt(subCate) || undefined;
 
         // Check if it's a valid subcategory, if not, remove it from the query params and return the all products
-        if (!subcategories.find(subcategory => subcategory.id === subCategoryId)) {
+        if (subCategoryId && !subcategories.find(subcategory => subcategory.id === subCategoryId)) {
           this.router.navigate(['/'], {
             queryParams: {
               subCate: undefined,
@@ -41,12 +42,17 @@ export class HomeComponent {
           });
 
           this.selectedSubcategoryId$.next(undefined);
-          return products;
         }
 
         this.selectedSubcategoryId$.next(subCategoryId);
 
-        return this.productsService.filterProductsBySubCategory(products, subCategoryId);
+        // Filter by subcategory
+        copyProducts = this.productsService.filterProductsBySubCategory(products, subCategoryId);
+
+        // Filter by search term
+        copyProducts = this.productsService.searchProducts(copyProducts, search);
+
+        return copyProducts;
       }),
     );
   }

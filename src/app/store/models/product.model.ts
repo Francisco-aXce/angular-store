@@ -2,6 +2,7 @@
 
 export enum Filters {
   SUBCATEGORY = 'subCate',
+  SEARCH = 'search',
 }
 
 export enum SortOptions {
