@@ -72,7 +72,7 @@
 
             <!-- Contraseña -->
             <mat-form-field appearance="outline">
-              <mat-label>Ingresa tu contraseña</mat-label>
+              <mat-label>Ingresa una contraseña</mat-label>
               <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
               <button type="button" mat-icon-button matSuffix (click)="onTogglePassword()"
                 [attr.aria-pressed]="hidePassword">
@@ -81,13 +81,15 @@
                 </mat-icon>
               </button>
               <mat-error *ngIf="password.hasError('required')">
-                Ingresa tu contraseña.
+                Debes elegir una contraseña.
               </mat-error>
               <mat-error *ngIf="!password.hasError('required') && password.hasError('pattern')">
-                Ingresa una contraseña válida.
+                Debe tener al menos una mayúscula, una minúscula, un número y un caracter especial (@, $, !, %, *, ?,
+                &).
               </mat-error>
             </mat-form-field>
-            <a [routerLink]="['/auth', 'login']">¿Ya tienes una cuenta? Inicia sesión</a>
+            <a [ngStyle]="{'margin-top': '40px'}" [routerLink]="['/auth', 'login']">¿Ya tienes una cuenta? Inicia
+              sesión</a>
           </section>
 
         </mat-card-content>
