@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from '../../models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -9,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent {
 
-  readonly loginFormGroup = new FormGroup({
+  readonly signupFormGroup = new FormGroup({
     // Both name and surname allows for alphabetic characters (both uppercase and lowercase), spaces, hyphens, and apostrophes.
     name: new FormControl<string>('', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÖØ-öø-ÿ\-']+(\s[a-zA-ZÀ-ÖØ-öø-ÿ\-']+)*$/)]),
     surname: new FormControl<string>('', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÖØ-öø-ÿ\-']+(\s[a-zA-ZÀ-ÖØ-öø-ÿ\-']+)*$/)]),
@@ -25,15 +27,16 @@ export class SignupComponent {
   hidePassword = true;
   loading = false;
 
-  get name() { return this.loginFormGroup.controls.name; }
-  get surname() { return this.loginFormGroup.controls.surname; }
-  get dni() { return this.loginFormGroup.controls.dni; }
-  get email() { return this.loginFormGroup.controls.email; }
-  get cellphone() { return this.loginFormGroup.controls.cellphone; }
-  get password() { return this.loginFormGroup.controls.password; }
+  get name() { return this.signupFormGroup.controls.name; }
+  get surname() { return this.signupFormGroup.controls.surname; }
+  get dni() { return this.signupFormGroup.controls.dni; }
+  get email() { return this.signupFormGroup.controls.email; }
+  get cellphone() { return this.signupFormGroup.controls.cellphone; }
+  get password() { return this.signupFormGroup.controls.password; }
 
   constructor(
     private router: Router,
+    private authService: AuthService,
   ) { }
 
   onTogglePassword() {
@@ -45,7 +48,31 @@ export class SignupComponent {
   }
 
   async onSubmit() {
+    this.signupFormGroup.markAllAsTouched();
+    if (this.signupFormGroup.invalid) return;
+    this.loading = true;
 
+    const name = this.name.value ?? '';
+    const surname = this.surname.value ?? '';
+    const dni = this.dni.value ?? '';
+    const email = this.email.value ?? '';
+    const phone = this.cellphone.value ?? '';
+    const password = this.password.value ?? '';
+    // Its defined by the service when the user is created.
+    const uid = '';
+
+    const userData: User = {
+      uid,
+      name,
+      surname,
+      dni,
+      email,
+      phone,
+      password,
+    };
+
+    await this.authService.signup(userData);
+    this.loading = false;
   }
 
 }

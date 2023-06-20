@@ -1,52 +1,58 @@
 <main class="login main-container">
   <section class="centered-section">
-    <mat-card class="login__card">
-      <mat-card-header>
-        <mat-card-title>Iniciar sesión</mat-card-title>
-      </mat-card-header>
 
-      <mat-card-content>
-        <form class="input-container" [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
-          <mat-form-field appearance="outline">
-            <mat-label>Ingresa tu email</mat-label>
-            <input type="email" matInput placeholder="francisco@ejemplo.com" formControlName="email" required>
-            <mat-error *ngIf="email.hasError('required')">
-              Ingresa tu email.
-            </mat-error>
-            <mat-error *ngIf="!email.hasError('required') && email.hasError('email')">
-              Ingresa un email válido.
-            </mat-error>
-          </mat-form-field>
+    <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
+      <mat-card class="login__card">
+        <mat-card-header>
+          <mat-card-title>Iniciar sesión</mat-card-title>
+        </mat-card-header>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Ingresa tu contraseña</mat-label>
-            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
-            <button type="button" mat-icon-button matSuffix (click)="onTogglePassword()"
-              [attr.aria-pressed]="hidePassword">
-              <mat-icon>
-                {{hidePassword ? 'visibility_off' : 'visibility'}}
-              </mat-icon>
-            </button>
-            <mat-error *ngIf="password.hasError('required')">
-              Ingresa tu contraseña.
-            </mat-error>
-            <mat-error *ngIf="!password.hasError('required') && password.hasError('pattern')">
-              Ingresa una contraseña válida.
-            </mat-error>
-          </mat-form-field>
-        </form>
-        <a [routerLink]="['/auth', 'signup']">¿Nuevo por aquí? Regístrate</a>
-      </mat-card-content>
+        <mat-card-content>
 
-      <mat-card-actions>
-        <button mat-button type="button" (click)="onCancel()">Cancelar</button>
-        <button mat-raised-button [disabled]="loading" color="primary">
-          <mat-icon *ngIf="loading">
-            <mat-progress-spinner mode="indeterminate" [diameter]="17" color="accent"></mat-progress-spinner>
-          </mat-icon>
-          Iniciar sesión
-        </button>
-      </mat-card-actions>
-    </mat-card>
+          <section class="input-container">
+            <mat-form-field appearance="outline">
+              <mat-label>Ingresa tu email</mat-label>
+              <input type="email" matInput placeholder="francisco@ejemplo.com" formControlName="email" required>
+              <mat-error *ngIf="email.hasError('required')">
+                Ingresa tu email.
+              </mat-error>
+              <mat-error *ngIf="!email.hasError('required') && email.hasError('email')">
+                Ingresa un email válido.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Ingresa tu contraseña</mat-label>
+              <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+              <button type="button" mat-icon-button matSuffix (click)="onTogglePassword()"
+                [attr.aria-pressed]="hidePassword">
+                <mat-icon>
+                  {{hidePassword ? 'visibility_off' : 'visibility'}}
+                </mat-icon>
+              </button>
+              <mat-error *ngIf="password.hasError('required')">
+                Ingresa tu contraseña.
+              </mat-error>
+              <mat-error *ngIf="!password.hasError('required') && password.hasError('pattern')">
+                Ingresa una contraseña válida.
+              </mat-error>
+            </mat-form-field>
+            <a [routerLink]="['/auth', 'signup']">¿Nuevo por aquí? Regístrate</a>
+          </section>
+
+        </mat-card-content>
+
+        <mat-card-actions>
+          <button mat-button type="button" (click)="onCancel()">Cancelar</button>
+          <button mat-raised-button [disabled]="loading" color="primary">
+            <mat-icon *ngIf="loading">
+              <mat-progress-spinner mode="indeterminate" [diameter]="17" color="accent"></mat-progress-spinner>
+            </mat-icon>
+            Iniciar sesión
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+
   </section>
 </main>
