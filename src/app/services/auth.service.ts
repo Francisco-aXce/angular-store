@@ -20,6 +20,11 @@ export class AuthService {
     this.currentUser$ = new BehaviorSubject<User | null>(user);
   }
 
+  public logout(): void {
+    localStorage.removeItem(AuthService.CURRENT_USER_KEY);
+    this.currentUser$.next(null);
+  }
+
   /**
    * Try to login with the given credentials.
    * @param {LoginUser} credentials

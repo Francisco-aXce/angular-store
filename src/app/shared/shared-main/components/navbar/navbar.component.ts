@@ -32,7 +32,7 @@ export class NavbarComponent {
   }
 
   public onLogout() {
-    // this.authService.logout();
+    this.authService.logout();
   }
 
 }
