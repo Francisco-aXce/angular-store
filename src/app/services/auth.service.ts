@@ -82,6 +82,7 @@ export class AuthService {
 
     return await new Promise(resolve => setTimeout(() => {
 
+      this.toastr.success('Te has registrado correctamente, inicia sesión', 'Bienvenido');
       // Navigates to the login page
       this.router.navigate(['/auth', 'login']);
 

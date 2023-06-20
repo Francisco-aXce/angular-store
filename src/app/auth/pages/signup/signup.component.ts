@@ -58,11 +58,8 @@ export class SignupComponent {
     const email = this.email.value ?? '';
     const phone = this.cellphone.value ?? '';
     const password = this.password.value ?? '';
-    // Its defined by the service when the user is created.
-    const uid = '';
 
     const userData: User = {
-      uid,
       name,
       surname,
       dni,

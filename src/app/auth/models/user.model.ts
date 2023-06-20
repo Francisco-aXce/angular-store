@@ -4,7 +4,6 @@ export interface LoginUser {
 }
 
 export interface User extends LoginUser {
-  uid: string;
   name: string;
   surname: string;
   dni: string;
